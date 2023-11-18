@@ -1,0 +1,19 @@
+.featured-image {
+  /*background-image: url("../../../assets/home/featured.jpg");
+  background-position: center;
+  background-size: cover;
+  background: linear-gradient(
+    0deg,
+    rgba(21, 21, 21, 0.7) 0%,
+    rgba(21, 21, 21, 0.7) 100%,
+    lightgray 50%
+  ); */
+  background: linear-gradient(
+      0deg,
+      rgba(21, 21, 21, 0.7) 0%,
+      rgba(21, 21, 21, 0.7) 100%
+    ),
+    url("../../../assets/home/featured.jpg"), lightgray 50% / cover no-repeat;
+  background-size: cover;
+  background-attachment: fixed, fixed;
+}
