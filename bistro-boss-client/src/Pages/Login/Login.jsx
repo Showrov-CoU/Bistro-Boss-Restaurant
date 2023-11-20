@@ -5,10 +5,13 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const captchaRef = useRef(null);
+  const { signIn } = useContext(AuthContext);
 
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -21,7 +24,11 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const pass = form.password.value;
-    console.log(email, pass);
+    // console.log(email, pass);
+    // console.log(signIn);
+    signIn(email, pass)
+      .then((res) => console.log(res.user))
+      .catch((err) => console.log(err.message));
   };
 
   const handleValidedCaptcha = () => {
@@ -58,7 +65,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="email"
+                  placeholder="Type here"
                   className="input input-bordered"
                   required
                 />
@@ -70,7 +77,7 @@ const Login = () => {
                 <input
                   type="password"
                   name="password"
-                  placeholder="password"
+                  placeholder="Enter your password"
                   className="input input-bordered"
                   required
                 />
@@ -100,6 +107,15 @@ const Login = () => {
                 </button>
               </div>
             </form>
+            <p className="text-center mb-5">
+              New here?{" "}
+              <Link
+                to="/signup"
+                className="underline text-blue-500 font-semibold"
+              >
+                Create a New Account
+              </Link>
+            </p>
           </div>
         </div>
       </div>
