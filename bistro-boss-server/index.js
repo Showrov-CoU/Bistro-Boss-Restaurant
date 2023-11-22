@@ -33,6 +33,7 @@ dbConnect();
 const db = client.db("bistroDB");
 const menuCollection = db.collection("menu");
 const reviewCollection = db.collection("reviews");
+const cartCollection = db.collection("carts");
 
 app.get("/menu", async (req, res) => {
   try {
@@ -49,6 +50,18 @@ app.get("/review", async (req, res) => {
   } catch (error) {
     res.send(error.message);
   }
+});
+app.get("/carts", async (req, res) => {
+  const email = req.query.email;
+  const query = { email: email };
+  const cartItems = await cartCollection.find(query).toArray();
+  res.send(cartItems);
+});
+
+app.post("/carts", async (req, res) => {
+  const item = req.body;
+  const result = await cartCollection.insertOne(item);
+  res.send(result);
 });
 
 app.get("/", async (req, res) => {
