@@ -13,9 +13,9 @@ import Swal from "sweetalert2";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
 
   const from = location.state?.from?.pathname || "/";
+
   const { signIn } = useContext(AuthContext);
 
   const [isDisabled, setIsDisabled] = useState(true);
@@ -54,7 +54,26 @@ const Login = () => {
         form.reset();
         navigate(from, { replace: true });
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        console.log(err.message);
+        Swal.fire({
+          title: "Invalid-login-credentials",
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `,
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `,
+          },
+        });
+      });
   };
 
   const handleValidedCaptcha = (e) => {
