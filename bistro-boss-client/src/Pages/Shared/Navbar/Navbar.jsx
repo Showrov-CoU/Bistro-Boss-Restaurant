@@ -31,7 +31,7 @@ const Navbar = () => {
         <Link to="/secret">Secret</Link>
       </li>
       <li>
-        <Link to="/secret">
+        <Link to="/dashboard/cart">
           <button className="btn btn-sm">
             <FaCartArrowDown size={20} />
             <div className="badge badge-secondary">+{cart.length}</div>
